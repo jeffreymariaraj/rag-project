@@ -125,18 +125,20 @@ class ChromaVectorStore:
         
         # Get or create collection
         try:
-            self.collection = self.client.get_collection(
-                name=collection_name,
-                embedding_function=self._embedding_function
-            )
-            logger.info(f"Loaded existing collection: {collection_name}")
-        except:
-            self.collection = self.client.create_collection(
-                name=collection_name,
-                embedding_function=self._embedding_function,
-                metadata={"hnsw:space": "cosine"}  # Use cosine similarity
-            )
-            logger.info(f"Created new collection: {collection_name}")
+            # First try to get the collection
+            try:
+                self.collection = self.client.get_collection(name=collection_name)
+                logger.info(f"Loaded existing collection: {collection_name}")
+            except Exception:
+                # If it doesn't exist, create it
+                self.collection = self.client.create_collection(
+                    name=collection_name,
+                    metadata={"hnsw:space": "cosine"}  # Use cosine similarity
+                )
+                logger.info(f"Created new collection: {collection_name}")
+        except Exception as e:
+            logger.error(f"Error initializing ChromaDB collection: {e}")
+            raise
     
     def _embedding_function(self, texts: List[str]) -> List[List[float]]:
         """Embedding function for ChromaDB"""

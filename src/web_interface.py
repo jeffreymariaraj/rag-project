@@ -197,7 +197,7 @@ def display_context(context_items: List[Dict], current_paper_index: int = 0):
                 if st.button("⬅️ Previous Paper", key="prev_paper", 
                            help=f"Go to {paper_titles[current_paper_index-1]}"):
                     st.session_state.current_paper_index = current_paper_index - 1
-                    st.experimental_rerun()
+                    st.rerun()
         with col2:
             st.write(f"Paper {current_paper_index + 1} of {len(paper_titles)}")
         with col3:
@@ -205,7 +205,7 @@ def display_context(context_items: List[Dict], current_paper_index: int = 0):
                 if st.button("Next Paper ➡️", key="next_paper", 
                            help=f"Go to {paper_titles[current_paper_index+1]}"):
                     st.session_state.current_paper_index = current_paper_index + 1
-                    st.experimental_rerun()
+                    st.rerun()
         
         # Display current paper
         current_paper_title = paper_titles[current_paper_index]
@@ -409,7 +409,7 @@ def display_prompt_templates():
                     with col1:
                         if st.button("Select", key=f"select_{template_id}"):
                             st.session_state.prompt_template_id = template_id
-                            st.experimental_rerun()
+                            st.rerun()
                     with col2:
                         if st.button("View", key=f"view_{template_id}"):
                             with st.expander("Template Details", expanded=True):
@@ -469,7 +469,7 @@ def render_sidebar():
             </div>
             """, unsafe_allow_html=True):
                 st.session_state.current_history_index = i
-                st.experimental_rerun()
+                st.rerun()
     
     st.sidebar.divider()
     
@@ -480,7 +480,7 @@ def render_sidebar():
     if st.sidebar.button("🗑️ Clear History"):
         st.session_state.history = []
         st.session_state.current_history_index = -1
-        st.experimental_rerun()
+        st.rerun()
     
     # Settings
     with st.sidebar.expander("🔧 Settings"):
@@ -597,7 +597,7 @@ def main():
             # Clear error after displaying
             if st.button("Clear Error"):
                 st.session_state.error = None
-                st.experimental_rerun()
+                st.rerun()
         
         # Check if we're viewing a history item
         viewing_history = st.session_state.current_history_index >= 0 and st.session_state.history
@@ -615,16 +615,16 @@ def main():
                 if st.session_state.current_history_index > 0:
                     if st.button("⬅️ Previous Query"):
                         st.session_state.current_history_index -= 1
-                        st.experimental_rerun()
+                        st.rerun()
             with col2:
                 if st.button("🔄 New Query"):
                     st.session_state.current_history_index = -1
-                    st.experimental_rerun()
+                    st.rerun()
             with col3:
                 if st.session_state.current_history_index < len(st.session_state.history) - 1:
                     if st.button("Next Query ➡️"):
                         st.session_state.current_history_index += 1
-                        st.experimental_rerun()
+                        st.rerun()
             
             # Display the response
             response = history_item['response']
@@ -682,7 +682,7 @@ def main():
                 for q in example_questions:
                     if st.button(q, key=f"example_{q[:20]}"):
                         query = q
-                        st.experimental_rerun()
+                        st.rerun()
             
             # Submit button
             submit = st.button("Submit", type="primary")
@@ -731,7 +731,7 @@ def main():
                             st.session_state.error = None
                             
                             # Rerun to display the history item
-                            st.experimental_rerun()
+                            st.rerun()
                             
                         except Exception as e:
                             # Handle API errors

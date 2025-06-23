@@ -6,3 +6,8 @@
 2025-06-23 09:00:37,578 - src.rag_pipeline - INFO - Retrieval settings: top_k=5, threshold=0.7
 2025-06-23 09:00:37,578 - src.rag_pipeline - INFO - Generating answer with gpt-3.5-turbo
 2025-06-23 09:00:37,578 - src.rag_pipeline - INFO - Answer generated in 0.00s, 120 tokens
+2025-06-23 11:18:43,190 - src.rag_pipeline - INFO - RAG Pipeline initialized with model gpt-3.5-turbo
+2025-06-23 11:18:43,190 - src.rag_pipeline - INFO - Retrieval settings: top_k=5, threshold=0.7
+2025-06-23 11:18:43,190 - src.rag_pipeline - INFO - Using prompt template: default
+2025-06-23 11:18:43,190 - src.rag_pipeline - INFO - Generating answer with gpt-3.5-turbo using template: default
+2025-06-23 11:18:43,191 - src.rag_pipeline - INFO - Answer generated in 0.00s, 120 tokens

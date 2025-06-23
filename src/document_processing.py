@@ -144,9 +144,14 @@ class PDFParser:
     
     def extract_paper_metadata(self, text: str, filename: str) -> Dict:
         """Extract paper-specific metadata like title, authors, abstract"""
+        # Try to extract title from text, if not possible use the filename
+        title = self._extract_title(text)
+        if title == "Untitled Research Paper":
+            title = Path(filename).stem.replace('_', ' ').title()
+            
         metadata = {
             'filename': filename,
-            'title': self._extract_title(text),
+            'title': title,
             'abstract': self._extract_abstract(text),
             'authors': self._extract_authors(text)
         }
@@ -164,8 +169,8 @@ class PDFParser:
                 if line[0].isupper() and not line.endswith('.'):
                     return line
         
-        # Fallback: use filename
-        return Path(filename).stem.replace('_', ' ').title()
+        # Fallback: use a generic title since filename isn't available here
+        return "Untitled Research Paper"
     
     def _extract_abstract(self, text: str) -> str:
         """Extract abstract from paper"""

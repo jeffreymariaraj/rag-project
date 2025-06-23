@@ -14,7 +14,7 @@ from typing import Dict, List
 # Add src directory to path
 sys.path.append('src')
 
-from vector_store import VectorStore
+from vector_store import VectorStoreManager
 from rag_pipeline import RAGPipeline
 
 # Set up logging
@@ -47,7 +47,7 @@ class RAGSystemDemo:
         
         # Initialize components
         logger.info("Initializing vector store...")
-        self.vector_store = VectorStore(persist_directory=vector_store_dir)
+        self.vector_store = VectorStoreManager(persist_directory=vector_store_dir)
         
         logger.info("Initializing RAG pipeline...")
         self.rag_pipeline = RAGPipeline(

@@ -31,6 +31,22 @@ except ImportError:
     except ImportError:
         VECTOR_STORE_AVAILABLE = False
         VectorStoreManager = None
+        # Define a simple PromptTemplates class if it's not available
+        class PromptTemplates:
+            def __init__(self):
+                self.templates = {
+                    'default': {
+                        'system_prompt': "You are a helpful AI assistant.",
+                        'user_prompt': "{query}"
+                    }
+                }
+            
+            def format_prompt(self, template_id, context, query, topic=None):
+                return {
+                    'system_prompt': self.templates['default']['system_prompt'],
+                    'user_prompt': query
+                }
+        
         print("Warning: Vector store dependencies not available. Some features will be limited.")
 
 # Set up logging
