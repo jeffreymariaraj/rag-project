@@ -320,5 +320,6 @@ For questions or issues:
 
 ---
 
-**Note**: This system is designed for educational and research purposes. Please respect the original papers' licenses and citations when using this system.#   r a g - p r o j e c t  
+**Note**: This system is designed for educational and research purposes. Please respect the original papers' licenses and citations when using this system.#   r a g - p r o j e c t 
+ 
  # rag-project
